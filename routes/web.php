@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+})->middleware('auth');
 
 Route::get('/login',[AuthController::class,'loginForm'])->name('auth.loginForm')->middleware('guest');
 Route::post('/login',[AuthController::class,'login'])->name('auth.login')->middleware('guest');
+Route::post('/logout',[AuthController::class,'logout'])->name('auth.logout')->middleware('auth');
 
