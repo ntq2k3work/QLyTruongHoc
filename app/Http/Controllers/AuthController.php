@@ -25,14 +25,14 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         $user = $request-> all();
-        $status = $this->__authService->login($user);
-        if($status){
-            toastr()->success('Đăng nhập thành công');
-            return redirect()->route('home');
-        }else{
-            toastr()->error('Tài khoản hoặc mật khẩu không chính xác');
-            return redirect()->back();
-        }
+        $remember = $user->remember_token ?? false;
+
+        $this->__authService->login($user, $remember);
+    }
+
+    public function logout()
+    {
+        $this->__authService->logout();
     }
 
 }
