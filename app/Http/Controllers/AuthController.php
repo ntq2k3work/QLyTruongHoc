@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ForgotPassRequest;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Services\AuthServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +35,30 @@ class AuthController extends Controller
     public function logout()
     {
         $this->__authService->logout();
+    }
+
+    public function forgotForm()
+    {
+        return view('auth.forgot');
+    }
+
+    public function forgot(ForgotPassRequest $request)
+    {
+        $email = $request-> validated();
+        $this->__authService->forgot($email);
+    }
+
+    public function resetForm(Request $token)
+    {
+
+        return view('auth.reset',$token);
+    }
+
+    public function resetPassword(ResetPasswordRequest $request)
+    {
+        $token = $request->token;
+        $password = $request-> password;
+        $this->__authService->resetPassword($password,$token);
     }
 
 }
