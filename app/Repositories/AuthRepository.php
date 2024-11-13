@@ -16,4 +16,9 @@ class AuthRepository
     {
         return $this->__auth->where('email', $email)->first();
     }
+
+    public function update($email, $password)
+    {
+        return $this->__auth->where('email', $email)->update(['password' => $password]);
+    }
 }
