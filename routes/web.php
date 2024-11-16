@@ -26,3 +26,25 @@ Route::post('/forgot',[AuthController::class,'forgot'])->name('auth.forgot')->mi
 Route::get('/reset',[AuthController::class,'resetForm'])->name('auth.resetForm')->middleware(['guest','reset']);
 Route::post('/reset',[AuthController::class,'resetPassword'])->name('auth.password.reset')->middleware(['guest','reset']);
 
+Route::prefix('admin')->middleware(['auth','admin'])->group(function(){
+    Route::get('/dashboard',function(){
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+});
+Route::prefix('student')->middleware(['auth','student'])->group(function(){
+    Route::get('/dashboard',function(){
+        return view('student.dashboard');
+    })->name('student.dashboard');
+});
+Route::prefix('teacher')->middleware(['auth','teacher'])->group(function(){
+    Route::get('/dashboard',function(){
+        return view('teacher.dashboard');
+    })->name('teacher.dashboard');
+});
+Route::prefix('parent')->middleware(['auth','parent'])->group(function(){
+    Route::get('/dashboard',function(){
+        return view('parent.dashboard');
+    })->name('parent.dashboard');
+});
+
+

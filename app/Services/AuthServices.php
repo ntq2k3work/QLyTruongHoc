@@ -28,7 +28,7 @@ class AuthServices
             session()->regenerate();
             toastr()->success('Đăng nhập thành công');
 
-            return redirect()->route('home');
+            return redirect()->route('admin.dashboard');
         }
 
         toastr()->error('Tài khoản hoặc mật khẩu không chính xác');

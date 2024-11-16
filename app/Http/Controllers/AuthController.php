@@ -29,12 +29,12 @@ class AuthController extends Controller
         $user = $request-> all();
         $remember = $user->remember_token ?? false;
 
-        $this->__authService->login($user, $remember);
+        return $this->__authService->login($user, $remember);
     }
 
     public function logout()
     {
-        $this->__authService->logout();
+        return $this->__authService->logout();
     }
 
     public function forgotForm()
